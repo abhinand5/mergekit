@@ -1,0 +1,11 @@
+base_model: google/gemma-2b
+gate_mode: random
+experts:
+  - source_model: google/gemma-2b
+    positive_prompts: [""]
+  - source_model: google/gemma-2b
+    positive_prompts: [""]
+  - source_model: google/gemma-2b
+    positive_prompts: [""]
+  - source_model: google/gemma-2b
+    positive_prompts: [""]

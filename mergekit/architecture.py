@@ -116,6 +116,24 @@ MISTRAL_INFO = StaticTensorNames(
     **LLAMA_INFO.model_dump(exclude=["name"]),
 )
 
+GEMMA_INFO = StaticTensorNames(
+    name="GemmaForCausalLM",
+    pre_weight_names=["model.embed_tokens.weight"],
+    post_weight_names=["model.norm.weight"],
+    embed_weight_names=["model.embed_tokens.weight"],
+    layer_prefix_format="model.layers.{idx}",
+    layer_weight_suffixes=[
+        "input_layernorm.weight",
+        "mlp.up_proj.weight",
+        "mlp.down_proj.weight",
+        "mlp.gate_proj.weight",
+        "post_attention_layernorm.weight",
+        "self_attn.q_proj.weight",
+        "self_attn.k_proj.weight",
+        "self_attn.v_proj.weight",
+        "self_attn.o_proj.weight",
+    ],
+)
 
 class MixtralTensorNames(ArchitectureInfo, BaseModel):
     ARCHITECTURE_NAME: ClassVar[str] = "MixtralForCausalLM"
@@ -476,6 +494,7 @@ def get_architecture_info(config: PretrainedConfig) -> StaticTensorNames:
         JAIS_INFO,
         BAICHUAN_INFO,
         FALCON_INFO,
+        GEMMA_INFO,
     ]
     for arch in supported:
         if arch.name == arch_name:
